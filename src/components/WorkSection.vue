@@ -4,6 +4,11 @@ import content from '../content.js'
 const work = content.work
 // 截图放在 public/screens/ 下，这里拼出相对路径（配合 base './' 可部署到子路径）
 const img = (name) => `${import.meta.env.BASE_URL}screens/${name}.png`
+
+// 卡片整体点击的目标：优先「体验地址 demo」，没有则用「GitHub 仓库 repo」
+const primaryHref = (p) => p.demo || p.repo || ''
+// 两个都填时，repo 作为卡片内的次要链接
+const hasSecondLink = (p) => Boolean(p.demo && p.repo)
 </script>
 
 <template>
@@ -20,7 +25,7 @@ const img = (name) => `${import.meta.env.BASE_URL}screens/${name}.png`
         <article
           v-for="(project, i) in work.projects"
           :key="project.title"
-          class="work-card"
+          :class="['work-card', { 'work-card--clickable': !!primaryHref(project) }]"
           v-reveal="String(0.05 + (i % 2) * 0.08) + 's'"
         >
           <!-- 封面：真实项目截图（电脑+手机双截图 / 双页面并排 / 单张宽屏 / 占位） -->
@@ -69,21 +74,28 @@ const img = (name) => `${import.meta.env.BASE_URL}screens/${name}.png`
               </li>
             </ul>
             <div class="work-card__links">
+              <!-- 主链接：用「拉伸」方式让整张卡片都可点击 -->
               <a
-                v-if="project.demo"
-                class="work-card__link"
-                :href="project.demo"
+                v-if="primaryHref(project)"
+                class="work-card__link work-card__link--stretched"
+                :href="primaryHref(project)"
                 target="_blank"
                 rel="noopener"
+                :aria-label="
+                  (project.demo ? '访问体验地址：' : '查看 GitHub 仓库：') +
+                  project.title
+                "
               >
-                查看项目 ↗
+                {{ project.demo ? '查看项目 ↗' : '查看源码 ↗' }}
               </a>
+              <!-- 次要链接：两层都有时单独给出 GitHub 入口 -->
               <a
-                v-if="project.repo"
-                class="work-card__link"
+                v-if="hasSecondLink(project)"
+                class="work-card__link work-card__link--above"
                 :href="project.repo"
                 target="_blank"
                 rel="noopener"
+                :aria-label="'查看 GitHub 仓库：' + project.title"
               >
                 源码
               </a>

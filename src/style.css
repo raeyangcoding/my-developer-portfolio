@@ -435,6 +435,7 @@ ul {
 .work-card {
   display: flex;
   flex-direction: column;
+  position: relative;
   background: var(--white);
   /* 无描边，只用阴影 */
   border: none;
@@ -446,6 +447,30 @@ ul {
 
 .work-card:hover {
   transform: translateY(-3px);
+  box-shadow: var(--shadow-card-hover);
+}
+
+/* —— 整张卡片可点击：用「拉伸链接」覆盖整卡，
+     卡片内其它链接（如"源码"）层级更高，仍可单独点击 —— */
+.work-card--clickable {
+  cursor: pointer;
+}
+
+.work-card__link--stretched::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  border-radius: inherit;
+}
+
+.work-card__link--above {
+  position: relative;
+  z-index: 2;
+}
+
+/* 键盘 Tab 到卡片内链接时，整卡也给出焦点反馈 */
+.work-card:focus-within {
   box-shadow: var(--shadow-card-hover);
 }
 

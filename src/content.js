@@ -64,9 +64,13 @@ const content = {
     title: '作品集',
     note: '从 0 到 1 开发',
     // 每个项目：
-    //  - layout: 'desktop-mobile'（电脑+手机双截图）/'two-pages'（两个页面）
+    //  - layout: 'desktop-mobile'（电脑+手机双截图）/'two-pages'（两个页面）/'desktop'（单张宽屏）
     //  - screens: 截图文件名（放在 public/screens/ 下，不含 .png）
-    //  - tags: 介绍标签 | demo / repo: 没有就填 ''，会隐藏对应按钮
+    //  - tags: 介绍标签
+    //  - demo: 体验地址   |   repo: GitHub 仓库地址
+    //    👉 两个都填：点整张卡片 = 去体验地址，卡片里另有「源码」入口
+    //    👉 只填一个：点整张卡片 = 去填了的那个（另一个按钮自动隐藏）
+    //    👉 都填 ''：卡片不可点击，也不显示按钮
     projects: [
       {
         title: 'Sleepy Randomizer',
