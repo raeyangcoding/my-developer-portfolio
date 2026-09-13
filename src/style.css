@@ -25,15 +25,15 @@
   --shadow-soft: 0 18px 42px -28px rgba(50, 38, 31, 0.28);
 
   /* 👉 想调「作品集 / 技能」这些大标题的字号，改这一行 */
-  --title-size: clamp(1.9rem, 3.4vw, 2.6rem);
+  --title-size: clamp(1.4rem, 2.2vw, 1.85rem);
   /* 👉 想调「模块之间的上下间距」，改这一行 */
-  --section-gap: clamp(64px, 7vw, 96px);
+  --section-gap: clamp(48px, 4.5vw, 72px);
   /* 👉 板块标题与其下方内容的距离 */
-  --section-head-gap: clamp(32px, 4vw, 48px);
+  --section-head-gap: clamp(22px, 2.5vw, 30px);
 
   --radius-lg: 20px;
   --radius-md: 12px;
-  --container: 1080px;
+  --container: 1360px;
   --footer-bg: #312520; /* 页脚深咖啡（也用于下拉回弹时的底色） */
 
   /* —— 字体 —— */
@@ -115,7 +115,7 @@ ul {
    通用布局
    ============================================================ */
 .container {
-  width: min(var(--container), 92vw);
+  width: min(var(--container), 94vw);
   margin-inline: auto;
 }
 
@@ -153,12 +153,13 @@ ul {
 /* Contact 眉标已改为左对齐（不再居中面板，无需两侧短线） */
 
 .section__title {
-  margin-top: 16px;
+  margin-top: 12px;
   font-size: var(--title-size);
   font-weight: 800;
-  line-height: 1.22;
-  letter-spacing: -0.015em;
-  color: var(--ink);
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  /* 标题用焦糖棕（主题色） */
+  color: var(--caramel);
 }
 
 .section__lead {
@@ -199,7 +200,7 @@ ul {
    页头（不固定）
    ============================================================ */
 .site-header {
-  padding: 24px 0 4px;
+  padding: 16px 0 2px;
 }
 
 .site-header__bar {
@@ -235,9 +236,9 @@ ul {
 
 .nav__link {
   /* 命中区 ≥44px */
-  padding: 11px 18px;
+  padding: 10px 16px;
   border-radius: 999px;
-  font-size: 0.95rem;
+  font-size: 0.92rem;
   font-weight: 600;
   color: color-mix(in srgb, var(--ink) 72%, transparent);
   transition: background 0.2s ease, color 0.2s ease;
@@ -252,8 +253,8 @@ ul {
    第一屏：自我介绍（左对齐，干净利落）
    ============================================================ */
 .hero--intro {
-  /* 不再强制整屏高度：内容多少就占多少，避免自我介绍与下一屏之间出现大片空白 */
-  padding: clamp(56px, 7vh, 88px) 0 clamp(40px, 5vh, 64px);
+  /* 不再强制整屏高度：内容多少就占多少，且上下收紧，让「技能」往上提 */
+  padding: clamp(36px, 4.5vh, 56px) 0 clamp(24px, 3vh, 40px);
 }
 
 .intro {
@@ -316,7 +317,7 @@ ul {
   border: none;
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-card);
-  padding: 30px 28px;
+  padding: 24px 22px;
 }
 
 .skills-group__label {
@@ -345,12 +346,12 @@ ul {
 }
 
 .tag-pill {
-  padding: 8px 16px;
-  border-radius: 10px;
+  padding: 6px 13px;
+  border-radius: 9px;
   border: 1.5px solid var(--caramel);
   background: transparent;
   color: var(--caramel);
-  font-size: 0.95rem;
+  font-size: 0.88rem;
   font-weight: 600;
   transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
 }
@@ -429,7 +430,7 @@ ul {
 .work-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: clamp(22px, 3vw, 30px);
+  gap: clamp(18px, 2vw, 24px);
 }
 
 .work-card {
@@ -469,15 +470,15 @@ ul {
   box-shadow: var(--shadow-card-hover);
 }
 
-/* 封面：项目真实截图展示区 */
+/* 封面：项目真实截图展示区（2:1 扁一些，卡片不显笨重） */
 .work-card__cover {
   position: relative;
-  aspect-ratio: 16 / 10;
+  aspect-ratio: 2 / 1;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 0;
-  padding: 22px;
+  padding: 16px;
   background: var(--white);
   overflow: hidden;
 }
@@ -491,32 +492,34 @@ ul {
   box-shadow: 0 16px 40px -26px rgba(50, 38, 31, 0.5);
 }
 
-/* 电脑 + 手机 双截图 */
+/* 电脑 + 手机 双截图（竖版手机图按高度对齐，避免撑高封面） */
 .shot--desktop {
-  width: 68%;
+  width: 62%;
 }
 
 .shot--mobile {
-  width: 30%;
+  height: 92%;
+  width: auto;
   margin-left: -10px;
   border: 3px solid var(--white);
-  border-radius: 14px;
+  border-radius: 12px;
 }
 
 /* 单个宽屏截图 */
 .cover--desktop .shot--single {
-  width: 88%;
-  border-radius: 10px;
+  width: 86%;
+  border-radius: 8px;
 }
 
-/* 两个页面 并排 */
+/* 两个页面 并排（竖版按高度对齐） */
 .cover--two-pages {
   gap: 14px;
 }
 
 .shot--page {
-  width: 38%;
-  border-radius: 12px;
+  height: 100%;
+  width: auto;
+  border-radius: 10px;
 }
 
 /* 占位卡片：暂无截图 */
@@ -542,36 +545,37 @@ ul {
   display: flex;
   flex: 1;
   flex-direction: column;
-  padding: 24px 24px 20px;
+  padding: 16px 18px 14px;
 }
 
 .work-card__title {
-  font-size: 1.22rem;
+  font-size: 1.05rem;
   font-weight: 800;
   letter-spacing: -0.01em;
   color: var(--ink);
 }
 
 .work-card__desc {
-  margin-top: 10px;
-  font-size: 0.96rem;
+  margin-top: 8px;
+  font-size: 0.88rem;
+  line-height: 1.7;
   color: color-mix(in srgb, var(--ink) 72%, transparent);
 }
 
 .work-card__tags {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
-  margin-top: 16px;
+  gap: 6px;
+  margin-top: 12px;
 }
 
 .mini-tag {
-  padding: 4px 11px;
+  padding: 3px 10px;
   border-radius: 999px;
   border: 1.5px solid var(--caramel);
   background: transparent;
   color: var(--caramel);
-  font-size: 0.78rem;
+  font-size: 0.72rem;
   font-weight: 700;
 }
 
@@ -579,7 +583,7 @@ ul {
   display: flex;
   gap: 6px;
   margin-top: auto;
-  padding-top: 20px;
+  padding-top: 12px;
 }
 
 .work-card__link {
@@ -589,7 +593,7 @@ ul {
   /* 扩大命中区 ≥44px，下划线用 text-decoration 保持位置 */
   padding: 10px 8px;
   margin: -10px -8px;
-  font-size: 0.95rem;
+  font-size: 0.88rem;
   font-weight: 700;
   color: var(--caramel);
   text-decoration: underline;
