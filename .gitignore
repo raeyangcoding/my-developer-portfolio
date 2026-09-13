@@ -11,6 +11,10 @@ dist
 .trae/
 skills/
 
+# 个人参考产物：保留在本地，但不进公开仓库
+audit/
+scripts/fetch-impeccable.mjs
+
 *.local
 .DS_Store
 Thumbs.db
