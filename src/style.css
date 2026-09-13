@@ -1,0 +1,752 @@
+/* ============================================================
+   🎨 设计令牌（Design Tokens）—— 全部颜色 / 字号 / 间距都在这里改
+   主题：焦糖棕 + 白 & 奶咖白（已反转：白底 + 奶咖白卡片）
+   ============================================================ */
+:root {
+  /* —— 表面色（大面积奶咖白 + 纯白卡片，配焦糖棕做对比） —— */
+  --cream: #f5f1e9; /* 奶咖白：页面底色（大面积） */
+  --white: #ffffff; /* 纯白：卡片底色 */
+
+  /* —— 文字色 —— */
+  --ink: #32261f; /* 主文字（深咖啡墨色） */
+
+  /* —— 主题强调色 —— */
+  --caramel: #8c5a42; /* 焦糖棕（主色：强调/按钮/名字） */
+  --caramel-strong: #6e4230; /* 焦糖深（悬停） */
+  --caramel-deep: #4c2e1e; /* 焦糖暗（深色块） */
+
+  /* —— 分隔线 —— */
+  --ink-line: rgba(50, 38, 31, 0.1); /* 发丝分隔线 */
+  --ink-line-strong: rgba(50, 38, 31, 0.22);
+
+  /* —— 阴影：卡片不用描边，只用阴影 —— */
+  --shadow-card: 0 10px 26px -18px rgba(50, 38, 31, 0.35);
+  --shadow-card-hover: 0 18px 36px -22px rgba(50, 38, 31, 0.45);
+  --shadow-soft: 0 18px 42px -28px rgba(50, 38, 31, 0.28);
+
+  /* 👉 想调「作品集 / 技能」这些大标题的字号，改这一行 */
+  --title-size: clamp(1.9rem, 3.4vw, 2.6rem);
+  /* 👉 想调「模块之间的上下间距」，改这一行 */
+  --section-gap: clamp(64px, 7vw, 96px);
+  /* 👉 板块标题与其下方内容的距离 */
+  --section-head-gap: clamp(32px, 4vw, 48px);
+
+  --radius-lg: 20px;
+  --radius-md: 12px;
+  --container: 1080px;
+  --footer-bg: #312520; /* 页脚深咖啡（也用于下拉回弹时的底色） */
+
+  /* —— 字体 —— */
+  --font-sans: 'Manrope', 'PingFang SC', 'Hiragino Sans GB',
+    'Microsoft YaHei', 'Noto Sans SC', -apple-system, 'Segoe UI', Roboto,
+    'Helvetica Neue', Arial, sans-serif;
+}
+
+/* ============================================================
+   基础
+   ============================================================ */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  /* 下拉回弹时露出的区域用页脚色，避免底部出现一条白边 */
+  background: var(--footer-bg);
+  overscroll-behavior-y: none;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: var(--font-sans);
+  font-size: 17px;
+  line-height: 1.75;
+  color: var(--ink);
+  background: var(--cream); /* 页面底色（奶咖白） */
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+h1,
+h2,
+h3,
+p,
+figure,
+ul {
+  margin: 0;
+}
+
+img,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font: inherit;
+  cursor: pointer;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+::selection {
+  background: var(--caramel);
+  color: var(--cream);
+}
+
+:focus-visible {
+  outline: 2px solid var(--caramel);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ============================================================
+   通用布局
+   ============================================================ */
+.container {
+  width: min(var(--container), 92vw);
+  margin-inline: auto;
+}
+
+.section {
+  /* 区块纵向节奏：改 :root 里的 --section-gap 即可 */
+  padding: var(--section-gap) 0;
+  position: relative;
+}
+
+/* 交替的浅色区块已移除：全站统一奶咖白底 + 纯白卡片，不再增加多余色调 */
+
+.section__head {
+  max-width: 760px;
+  margin-bottom: var(--section-head-gap);
+}
+
+.section__head--center {
+  margin-inline: auto;
+  text-align: center;
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--caramel);
+}
+
+/* 眉标 = 纯文字，无左侧短杠 */
+
+/* Contact 眉标已改为左对齐（不再居中面板，无需两侧短线） */
+
+.section__title {
+  margin-top: 16px;
+  font-size: var(--title-size);
+  font-weight: 800;
+  line-height: 1.22;
+  letter-spacing: -0.015em;
+  color: var(--ink);
+}
+
+.section__lead {
+  margin-top: 14px;
+  color: color-mix(in srgb, var(--ink) 72%, transparent);
+}
+
+/* ============================================================
+   按钮（焦糖棕实心）
+   ============================================================ */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 48px;
+  padding: 10px 28px;
+  border-radius: 999px;
+  border: 1.5px solid transparent;
+  font-weight: 700;
+  font-size: 1rem;
+  transition: background 0.2s ease, transform 0.2s ease,
+    box-shadow 0.2s ease, color 0.2s ease;
+}
+
+.btn--primary {
+  background: var(--caramel);
+  color: var(--white);
+}
+
+.btn--primary:hover {
+  background: var(--caramel-strong);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-soft);
+}
+
+/* ============================================================
+   页头（不固定）
+   ============================================================ */
+.site-header {
+  padding: 24px 0 4px;
+}
+
+.site-header__bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px 20px;
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 800;
+  font-size: 1.15rem;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+}
+
+.brand__dot {
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: var(--caramel);
+}
+
+.nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.nav__link {
+  /* 命中区 ≥44px */
+  padding: 11px 18px;
+  border-radius: 999px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: color-mix(in srgb, var(--ink) 72%, transparent);
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.nav__link:hover {
+  background: var(--white);
+  color: var(--caramel);
+}
+
+/* ============================================================
+   第一屏：自我介绍（左对齐，干净利落）
+   ============================================================ */
+.hero--intro {
+  /* 不再强制整屏高度：内容多少就占多少，避免自我介绍与下一屏之间出现大片空白 */
+  padding: clamp(56px, 7vh, 88px) 0 clamp(40px, 5vh, 64px);
+}
+
+.intro {
+  max-width: 900px;
+}
+
+.intro__greeting {
+  margin: 0 0 0.55em;
+  font-size: clamp(2.05rem, 4.4vw + 0.5rem, 3.4rem);
+  font-weight: 800;
+  line-height: 1.28;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+}
+
+.intro__name {
+  color: var(--caramel);
+  white-space: nowrap;
+}
+
+/* 正文逐行换行，字号随视口缩放保证不折行 */
+.intro__line {
+  margin: 0;
+  font-size: clamp(0.98rem, 2.1vw + 0.5rem, 1.28rem);
+  line-height: 2.05;
+  font-weight: 550;
+  color: color-mix(in srgb, var(--ink) 82%, transparent);
+}
+
+/* 结尾句强调 */
+.intro__line--punch {
+  margin-top: 0.5em;
+  font-weight: 800;
+  color: var(--caramel);
+}
+
+/* ============================================================
+   Skills（技能）
+   ============================================================ */
+.skills__layout {
+  display: grid;
+  grid-template-columns: 1.35fr 1fr;
+  gap: clamp(24px, 3.4vw, 40px);
+  align-items: stretch;
+}
+
+.skills__stack {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.skills__stack--wide {
+  grid-column: 1 / -1;
+}
+
+.skills-group {
+  background: var(--white);
+  /* 无描边，只用阴影 */
+  border: none;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+  padding: 30px 28px;
+}
+
+.skills-group__label {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 18px;
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--caramel);
+}
+
+.skills-group__label::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--ink-line);
+}
+
+.tag-cloud {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.tag-pill {
+  padding: 8px 16px;
+  border-radius: 10px;
+  border: 1.5px solid var(--caramel);
+  background: transparent;
+  color: var(--caramel);
+  font-size: 0.95rem;
+  font-weight: 600;
+  transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+}
+
+.tag-pill:hover {
+  background: var(--caramel);
+  color: var(--cream);
+  transform: translateY(-2px);
+}
+
+.now-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 100%;
+  padding: 32px 30px;
+  border-radius: var(--radius-lg);
+  background: linear-gradient(160deg, #8c5a42, #4c2e1e);
+  color: #fdf8f1;
+  overflow: hidden;
+}
+
+.now-card::after {
+  content: '';
+  position: absolute;
+  right: -48px;
+  top: -48px;
+  width: 150px;
+  height: 150px;
+  border: 1.5px dashed rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+}
+
+.now-card__label {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #f4e3d3;
+}
+
+.now-card__label::before {
+  content: '';
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #f4e3d3;
+  animation: pulse 1.6s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.4;
+    transform: scale(0.65);
+  }
+}
+
+.now-card p {
+  margin-top: 16px;
+  color: rgba(253, 248, 241, 0.92);
+  line-height: 1.9;
+}
+
+/* ============================================================
+   Work（作品）
+   ============================================================ */
+.work-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: clamp(22px, 3vw, 30px);
+}
+
+.work-card {
+  display: flex;
+  flex-direction: column;
+  background: var(--white);
+  /* 无描边，只用阴影 */
+  border: none;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+  overflow: hidden;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.work-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-card-hover);
+}
+
+/* 封面：项目真实截图展示区 */
+.work-card__cover {
+  position: relative;
+  aspect-ratio: 16 / 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  padding: 22px;
+  background: var(--white);
+  overflow: hidden;
+}
+
+.work-card__cover .shot {
+  display: block;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  border-radius: 8px;
+  box-shadow: 0 16px 40px -26px rgba(50, 38, 31, 0.5);
+}
+
+/* 电脑 + 手机 双截图 */
+.shot--desktop {
+  width: 68%;
+}
+
+.shot--mobile {
+  width: 30%;
+  margin-left: -10px;
+  border: 3px solid var(--white);
+  border-radius: 14px;
+}
+
+/* 单个宽屏截图 */
+.cover--desktop .shot--single {
+  width: 88%;
+  border-radius: 10px;
+}
+
+/* 两个页面 并排 */
+.cover--two-pages {
+  gap: 14px;
+}
+
+.shot--page {
+  width: 38%;
+  border-radius: 12px;
+}
+
+/* 占位卡片：暂无截图 */
+.cover--placeholder {
+  display: grid;
+  place-items: center;
+  background: var(--white);
+}
+
+.cover-plus {
+  display: grid;
+  place-items: center;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  border: 1.5px dashed var(--caramel);
+  color: var(--caramel);
+  font-size: 1.4rem;
+  line-height: 1;
+}
+
+.work-card__body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  padding: 24px 24px 20px;
+}
+
+.work-card__title {
+  font-size: 1.22rem;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+}
+
+.work-card__desc {
+  margin-top: 10px;
+  font-size: 0.96rem;
+  color: color-mix(in srgb, var(--ink) 72%, transparent);
+}
+
+.work-card__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.mini-tag {
+  padding: 4px 11px;
+  border-radius: 999px;
+  border: 1.5px solid var(--caramel);
+  background: transparent;
+  color: var(--caramel);
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+.work-card__links {
+  display: flex;
+  gap: 6px;
+  margin-top: auto;
+  padding-top: 20px;
+}
+
+.work-card__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  /* 扩大命中区 ≥44px，下划线用 text-decoration 保持位置 */
+  padding: 10px 8px;
+  margin: -10px -8px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--caramel);
+  text-decoration: underline;
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 6px;
+  text-decoration-color: transparent;
+  transition: color 0.2s ease, text-decoration-color 0.2s ease;
+}
+
+.work-card__link:hover {
+  color: var(--caramel-strong);
+  text-decoration-color: var(--caramel-strong);
+}
+
+/* ============================================================
+   Contact（联系）—— 左对齐、无卡片，与其它板块一致
+   ============================================================ */
+.contact__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 20px;
+}
+
+/* Contact：简介与按钮之间不需要 section 那套大间距 */
+.contact__head {
+  margin-bottom: 0;
+}
+
+.contact__or {
+  margin-top: 38px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: color-mix(in srgb, var(--ink) 55%, transparent);
+}
+
+.socials {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.social-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  padding: 10px 20px;
+  border-radius: 999px;
+  background: var(--white);
+  border: none;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--ink);
+  transition: transform 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.social-link:hover {
+  transform: translateY(-3px);
+  color: var(--caramel);
+  box-shadow: var(--shadow-card);
+}
+
+.social-link svg {
+  width: 18px;
+  height: 18px;
+  fill: currentColor;
+}
+
+/* 图片型图标（如博客园 logo） */
+.social-link__img {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+/* ============================================================
+   页脚（深咖啡）
+   ============================================================ */
+.site-footer {
+  padding: 40px 0;
+  background: var(--footer-bg);
+  color: rgba(253, 248, 241, 0.75);
+  font-size: 0.95rem;
+}
+
+.site-footer__bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 14px 24px;
+}
+
+.site-footer .brand {
+  color: var(--cream);
+}
+
+.site-footer__note {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+
+.site-footer__top {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: #e9d3c2;
+  font-weight: 700;
+  transition: color 0.2s ease;
+}
+
+.site-footer__top:hover {
+  color: var(--white);
+}
+
+/* ============================================================
+   滚动渐显（v-reveal）
+   ============================================================ */
+.rv {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.rv.is-in {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .rv {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  .now-card__label::before {
+    animation: none;
+  }
+  .work-card:hover,
+  .tag-pill:hover,
+  .social-link:hover,
+  .btn--primary:hover {
+    transform: none;
+  }
+}
+
+/* ============================================================
+   响应式
+   ============================================================ */
+@media (max-width: 900px) {
+  .skills__layout {
+    grid-template-columns: 1fr;
+  }
+  .now-card {
+    min-height: auto;
+  }
+  .work-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  body {
+    font-size: 16px;
+  }
+  .site-header__bar {
+    justify-content: center;
+  }
+  .section {
+    padding: 56px 0;
+  }
+}

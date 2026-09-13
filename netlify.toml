@@ -1,0 +1,4 @@
+# Netlify 部署配置（拖 dist 或用 Git 导入都适用）
+[build]
+  command = "npm run build"
+  publish = "dist"

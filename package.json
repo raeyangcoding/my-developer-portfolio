@@ -1,0 +1,21 @@
+{
+  "name": "my-developer-folio",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "description": "个人开发者作品集（Vue 3 + Vite），灵感来自 anniebombanie.com，暖咖色几何极简风",
+  "scripts": {
+    "dev": "vite",
+    "start": "vite",
+    "build": "node scripts/clean-dist.mjs && vite build",
+    "preview": "vite preview",
+    "serve": "node scripts/preview.mjs 4173"
+  },
+  "dependencies": {
+    "vue": "^3.5.13"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^5.2.1",
+    "vite": "^6.2.0"
+  }
+}

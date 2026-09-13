@@ -1,0 +1,16 @@
+node_modules
+dist
+.npm-cache
+
+# 本地日志
+*.log
+
+# 与站点无关的 agent skill 安装目录
+.agents/
+.claude/
+.trae/
+skills/
+
+*.local
+.DS_Store
+Thumbs.db
