@@ -44,7 +44,7 @@ const content = {
     groups: [
       {
         label: 'AI应用, vibe coding',
-        items: []
+        items: ['LLM API调用','RAG','Prompt Engineering','Skills','Python','JavaScript','SQL']
       },
       {
         label: '工具',
