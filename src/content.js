@@ -9,8 +9,7 @@ const content = {
   site: {
     // 名字（显示在导航栏和页脚）
     name: 'Rae Yang',
-    // 浏览器标签页标题（还会用 content.site.name 自动补全，见 App.vue）
-    pageTitle: 'Rae Yang',
+    // 注：浏览器标签页标题不在这个文件里，改 index.html 的 <title>（唯一来源，避免闪烁）
     // 一句话定位（显示在 Footer 等次要位置）
     tagline: 'front-end & design · keep learning'
   },
